@@ -1,0 +1,13 @@
+{
+  "name": "Payeer",
+  "settings": [
+    {
+      "variable": "m_shop",
+      "name": "Номер магазина"
+    },
+    {
+      "variable": "m_key",
+      "name": "Идентификатор продавца (секретный ключ)"
+    }
+  ]
+}
