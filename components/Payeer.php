@@ -80,7 +80,7 @@ class Payeer
       // Возращение номер платежа платежной системе, предварительно сверить с помощью цифровой подписью.
       case "handler":
       {
-        if(!in_array($_SERVER['REMOTE_ADDR'],array('185.71.65.92','185.71.65.189'))) die("Not access");
+        if(!in_array($_SERVER['REMOTE_ADDR'],array('185.71.65.92','185.71.65.189','149.202.17.210'))) die("Not access");
         if(isset($_POST['m_operation_id']) && isset($_POST['m_sign']))
         {
           $m_key=$this->m_key;
