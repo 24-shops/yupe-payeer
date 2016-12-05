@@ -26,7 +26,7 @@ return [
       ],
     ],
     'payeerBackend'=>[
-      'class'=>'application.modules.payeer.components.PayeerBackend',
+      'class'=>'application.modules.payeer.controllers.PayeerBackend',
     ],
     /*'callbackManager'=>[
       'class'=>'application.modules.callback.components.CallbackManager',
@@ -41,8 +41,8 @@ return [
     ],*/
   ],
   'rules'=>[
-    '/payeer'=>'/payment/payeer/',
-    '/payeer'=>'/payment/payeer/callback',
+    '/payeer/payeerBackend/index'=>'payeer/payeerBackend/index',
+    '/payeer'=>'payeer',
   ],
 ];
 

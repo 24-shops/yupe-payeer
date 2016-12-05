@@ -46,7 +46,7 @@ class PayeerBackendController extends BackController
 
   public function actionIndex()
   {
-    $model = new Payeer('search');
+    /*$model = new Payeer('search');
     $query = Yii::app()->getRequest()->getQuery('Payeer');
 
     $model->unsetAttributes();
@@ -55,7 +55,8 @@ class PayeerBackendController extends BackController
       $model->setAttributes($query);
     }
 
-    $this->render('index', ['model' => $model]);
+    $this->render('index', ['model' => $model]);*/
+    $this->render('index');
   }
 
   public function actionCreate()
