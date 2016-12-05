@@ -12,6 +12,11 @@ return [
   'module'=>[
     'class'=>'application.modules.payeer.PayeerModule',
   ],
+  'import'=>[
+    'application.modules.payeer.helpers.*',
+    'application.modules.payeer.PayeerModule',
+    //'application.modules.payeer.listeners.PayeerTemplateListener',
+  ],
   'component'=>[
     'paymentManager'=>[
       'paymentSystems'=>[
@@ -36,12 +41,8 @@ return [
     ],*/
   ],
   'rules'=>[
+    '/payeer'=>'/payment/payeer/',
     '/payeer'=>'/payment/payeer/callback',
-  ],
-  'import'=>[
-    'application.modules.payeer.helpers.*',
-    'application.modules.payeer.PayeerModule',
-    //'application.modules.payeer.listeners.PayeerTemplateListener',
   ],
 ];
 
