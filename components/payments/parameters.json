@@ -1,18 +1,18 @@
 {
-  "name": "Payeer",
-  "settings": [
-    {
-      "variable": "m_shop",
-      "name": "Номер магазина"
-    },
-    {
-      "variable": "m_key",
-      "name": "Идентификатор продавца (секретный ключ)"
-    },
-    {
-      "variable": "merchant_ips",
-      "name": "Список доверенных IP платежной системы Payeer.com"
-    }
-
-  ]
+    "name": "Payeer",
+    "settings":
+    [
+	{
+            "variable": "m_shop",
+            "name": "Номер магазина"
+        },
+        {
+            "variable": "m_key",
+            "name": "Идентификатор продавца (секретный ключ)"
+        },
+        {
+            "variable": "merchant_ips",
+            "name": "Список доверенных IP платежной системы Payeer.com"
+        }
+    ]
 }

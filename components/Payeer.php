@@ -22,19 +22,19 @@ class Payeer
     {
         $settings = $payment->getPaymentSystemSettings();
 
-        $this->merchant_ips = $settings['merchant_ips'];
+        $this->merchant_ips = !isset($settings['merchant_ips'])?false:$settings['merchant_ips'];
         if (!$this->merchant_ips)
         {
             $this->merchant_ips = ['185.71.65.92', '185.71.65.189', '149.202.17.210'];
         }
-        /*else
+        else
         {
             if (strpos(',', $this->merchant_ips)!=false)
             {
                 $ips = explode(',' $this->merchant_ips);
                 foreach($ips as $ip) $this->merchant_ips=trim($ip);
             }
-        }*/
+        }
 
         $this->m_shop = $settings['m_shop'];
         $this->m_key = $settings['m_key'];
