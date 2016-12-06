@@ -29,10 +29,23 @@ class Payeer
         }
         else
         {
-            if (strpos(',', $this->merchant_ips)!=false)
+            if (strpos($this->merchant_ips, ',')>0)
             {
-                $ips = explode(',' $this->merchant_ips);
-                foreach($ips as $ip) $this->merchant_ips=trim($ip);
+                $ips = explode(',', $this->merchant_ips);
+                $tmp = [];
+                foreach($ips as $ip) $tmp[] = trim($ip);
+                $this->merchant_ips = $tmp;
+            }
+            else
+            {
+                if (empty(trim($this->merchant_ips)))
+                {
+                    $this->merchant_ips = ['185.71.65.92', '185.71.65.189', '149.202.17.210'];
+                }
+                else
+                {
+                    $this->merchant_ips = [trim($this->merchant_ips)];
+                }
             }
         }
 
@@ -47,6 +60,16 @@ class Payeer
     public function getSessionId(Order $order)
     {
         $this->order = $order;
+
+        $data = [
+            #'m_orderid' => $this->key,
+        ];
+
+        #$sessionData = $this->sendRequest
+
+        #if (!isset($sessionData))
+
+        #echo "<pre>";var_dump(['ORDER'=>$order,'SELF CLASS'=>$this]);die();
     }
 
     public function buildUrl()

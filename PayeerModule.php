@@ -42,7 +42,8 @@ class PayeerModule extends WebModule
    */
   public function getNavigation()
   {
-    return [
+    return false;
+    /*return [
       [
         'icon'  => 'fa fa-fw fa-list-alt',
         'label' => 'Баланс кошелька',
@@ -50,7 +51,7 @@ class PayeerModule extends WebModule
           '/payeer/payeerBackend/index'
         ]
       ],
-    ];
+    ];*/
   }
 
   /**
@@ -58,7 +59,8 @@ class PayeerModule extends WebModule
    */
   public function getAdminPageLink()
   {
-    return '/payeer/payeerBackend/index';
+    return false;
+    //return '/payeer/payeerBackend/index';
   }
 
   /**
@@ -147,8 +149,8 @@ class PayeerModule extends WebModule
 
     $this->setImport(
       [
-        'application.modules.payeer.models.*',
-        'application.modules.payeer.components.widgets.*',
+        #'application.modules.payeer.models.*',
+        #'application.modules.payeer.components.widgets.*',
       ]
     );
   }

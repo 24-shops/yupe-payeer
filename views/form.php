@@ -16,7 +16,7 @@
  */
 ?>
 
-<?= CHtml::beginForm($action,"get",["_target"=>"blank"]) ?>
+<?= CHtml::beginForm($action, "get", ["_target" => "blank"]) ?>
 <?= CHtml::hiddenField('session_id', $sessionId) ?>
 <?= CHtml::submitButton(Yii::t('PayeerModule.payeer', 'Pay')) ?>
 <?= CHtml::endForm() ?>
