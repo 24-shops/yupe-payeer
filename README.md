@@ -3,7 +3,9 @@
 
 ## Загрузка модуля в свой интернет магазин
 Создать папку `/protected/modules/payeer/`
+
 Перейти в папку `/protected/modules/payeer/`
+
 Запустить команду `git clone git@github.com:24-shops/yupe-payeer.git`
 
 ## Установка и настройка
