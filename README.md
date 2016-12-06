@@ -2,11 +2,20 @@
 Модуль для интеграции с платежной системы [Payeer.com](https://payeer.com/03118520) для [CMS Yupe!](http://yupe.ru)
 
 ## Загрузка модуля в свой интернет магазин
-Создать папку `/protected/modules/payeer/`
+Создать папку
+```bash
+mkdir -p protected/modules/payeer/
+```
 
-Перейти в папку `/protected/modules/payeer/`
+Перейти в папку
+```bash
+cd protected/modules/payeer/
+```
 
-Запустить команду `git clone git@github.com:24-shops/yupe-payeer.git`
+Запустить команду
+```bash
+git clone git@github.com:24-shops/yupe-payeer.git
+```
 
 ## Установка и настройка
 * В панели управления сайтом установить модуль в разделе `Юпи - Модули`
