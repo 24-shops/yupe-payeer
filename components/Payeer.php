@@ -115,10 +115,10 @@ class Payeer
                         Yii::app()->getRequest()->getPost('m_status') == 'success'
                     )
                     {
-                        echo $_POST['m_orderid'] . '|success';
+                        echo Yii::app()->getRequest()->getPost('m_orderid') . '|success';
                         exit;
                     }
-                    echo $_POST['m_orderid'] . '|error';
+                    echo Yii::app()->getRequest()->getPost('m_orderid') . '|error';
                     exit;
                 }
             } // case "handler"
