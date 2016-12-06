@@ -15,80 +15,79 @@ Yii::import('application.modules.payeer.components.Payeer');
 
 class PayeerPaymentSystem extends PaymentSystem
 {
-  public function renderCheckoutForm(Payment $payment,Order $order,$return=false)
-  {
-    $payeer = new Payeer($payment);
-    $sessionId = $payeer->getSessionId($order);
-
-    /*if(!$sessionId)
+    public function renderCheckoutForm(Payment $payment,Order $order, $return = false)
     {
-      Yii::app()->getUser()->setFlash(
-        YFlashMessages::ERROR_MESSAGE,
-        Yii::t('PayeerModule.payeer','Payment by "{name}" is impossible',['{name}'=>$payment->name])
-      );
+        $payeer = new Payeer($payment);
+        $sessionId = $payeer->getSessionId($order);
 
-      return false;
-    }*/
+        if(!$sessionId)
+        {
+            Yii::app()->getUser()->setFlash(
+                YFlashMessages::ERROR_MESSAGE,
+                Yii::t('PayeerModule.payeer', 'Payment by "{name}" is impossible', ['{name}' => $payment->name])
+            );
 
-    $action = $payeer->buildUrl();
-    return Yii::app()->getController()->renderPartial(
-      'application.modules.payeer.views.form',
-      [
-        //'action' => $payeer->getUrl('Pay'),
-        //'action' => 'https://payeer.com/api/payment/',
-        'action' => $action,
-        'sessionId' => $sessionId
-      ],
-      $return
-    );
-  }
+            return false;
+        }
 
-  public function processCheckout(Payment $payment,CHttpRequest $request)
-  {
-    //$this->msg(__CLASS__." ".__METHOD__);
-    $payeer = new Payeer($payment);
-    $order = Order::model()->findByUrl($payeer->getOrderIdFromHash($request));
-
-    if($order === null)
-    {
-      Yii::log(Yii::t('PayeerModule.payeer', 'The order doesn\'t exist.'), CLogger::LEVEL_ERROR);
-
-      return false;
+        $action = $payeer->buildUrl();
+        return Yii::app()->getController()->renderPartial(
+            'application.modules.payeer.views.form',
+            [
+                //'action' => $payeer->getUrl('Pay'),
+                //'action' => 'https://payeer.com/api/payment/',
+                'action' => $action,
+                'sessionId' => $sessionId
+            ],
+            $return
+        );
     }
 
-    if($order->isPaid())
+    public function processCheckout(Payment $payment,CHttpRequest $request)
     {
-      Yii::log(
-        Yii::t('PayeerModule.payeer', 'The order #{n} is already payed.', $order->getPrimaryKey()),
-        CLogger::LEVEL_ERROR
-      );
+        $payeer = new Payeer($payment);
+        $order = Order::model()->findByUrl($payeer->getOrderIdFromHash($request));
 
-      return $order;
-    }
+        if($order === null)
+        {
+            Yii::log(Yii::t('PayeerModule.payeer', 'The order doesn\'t exist.'), CLogger::LEVEL_ERROR);
 
-    if($payeer->getPaymentStatus($request) === 'Charged' && $order->pay($payment))
-    {
-      Yii::log(
-        Yii::t('PayeerModule.payler', 'The order #{n} has been payed successfully.', $order->getPrimaryKey()),
-        CLogger::LEVEL_INFO
-      );
-    }
-    else
-    {
-      Yii::app()->getUser()->setFlash(
-        YFlashMessages::ERROR_MESSAGE,
-        Yii::t('PayeerModule.payeer', 'Attempt to pay failed')
-      );
-      Yii::log(
-        Yii::t(
-          'PayeerModule.payeer',
-          'An error occurred when you pay the order #{n}.',
-          $order->getPrimaryKey()
-        ),
-        CLogger::LEVEL_ERROR
-      );
-    }
+            return false;
+        }
 
-    return $order;
-  }
+        if($order->isPaid())
+        {
+            Yii::log(
+                Yii::t('PayeerModule.payeer', 'The order #{n} is already payed.', $order->getPrimaryKey()),
+                CLogger::LEVEL_ERROR
+            );
+
+            return $order;
+        }
+
+        if($payeer->getPaymentStatus($request) === 'Charged' && $order->pay($payment))
+        {
+            Yii::log(
+                Yii::t('PayeerModule.payler', 'The order #{n} has been payed successfully.', $order->getPrimaryKey()),
+                CLogger::LEVEL_INFO
+            );
+        }
+        else
+        {
+            Yii::app()->getUser()->setFlash(
+                YFlashMessages::ERROR_MESSAGE,
+                Yii::t('PayeerModule.payeer', 'Attempt to pay failed')
+            );
+            Yii::log(
+                Yii::t(
+                    'PayeerModule.payeer',
+                    'An error occurred when you pay the order #{n}.',
+                    $order->getPrimaryKey()
+                ),
+                CLogger::LEVEL_ERROR
+            );
+        }
+
+        return $order;
+    }
 }
