@@ -27,6 +27,14 @@ class Payeer
         {
             $this->merchant_ips = ['185.71.65.92', '185.71.65.189', '149.202.17.210'];
         }
+        else
+        {
+            if (strpos(',', $this->merchant_ips)!=false)
+            {
+                $ips = explode(',' $this->merchant_ips);
+                foreach($ips as $ip) $this->merchant_ips=trim($ip);
+            }
+        }
 
         $this->m_shop = $settings['m_shop'];
         $this->m_key = $settings['m_key'];
