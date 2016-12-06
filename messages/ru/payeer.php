@@ -9,11 +9,11 @@
  **/
 
 return [
-  'Attempt to pay failed' => 'Попытка оплатить заказ завершилась неудачей',
-  '24-shops' => '24-shops',
-  'Payment order #{n} on "{site}" website' => 'Оплата заказа №{n} на сайте "{site}"',
-  'Pay' => 'Оплатить',
-  'Payler payment module' => 'Модуль приёма оплаты банковскими картами через сервис Payeer',
-  'Payment by "{name}" is impossible' => 'Оплата "{name}" невозможна. Повторите попытку позднее или обратитесь к администратору.',
-  'Store' => 'Магазин',
+    'Attempt to pay failed' => 'Попытка оплатить заказ завершилась неудачей',
+    '24-shops' => '24-shops',
+    'Payment order #{n} on "{site}" website' => 'Оплата заказа №{n} на сайте "{site}"',
+    'Pay' => 'Оплатить',
+    'Payler payment module' => 'Модуль приёма оплаты банковскими картами через сервис Payeer',
+    'Payment by "{name}" is impossible' => 'Оплата "{name}" невозможна. Повторите попытку позднее или обратитесь к администратору.',
+    'Store' => 'Магазин',
 ];

@@ -18,86 +18,76 @@
  */
 class Payeer extends \yupe\models\YModel
 {
-  const STATUS_DRAFT = 0;
-  const STATUS_PUBLIC = 1;
-  const STATUS_PERSONAL = 2;
-  const STATUS_PRIVATE = 3;
+    const STATUS_DRAFT = 0;
+    const STATUS_PUBLIC = 1;
+    const STATUS_PERSONAL = 2;
+    const STATUS_PRIVATE = 3;
   
-  /**
-   * @return string
-   */
-  public function tableName()
-  {
-    return '{{payeer}}';
-  }
-
-  /**
-   * @return array
-   */
-  public function rules()
-  {
-    return [
-      [
-        'userid, description','required'
-      ],
-      [
-        'userid, sort','numerical','integerOnly' => true
-      ],
-      [
-        'description','length','max' => 255
-      ],
-      [
-        'status, sort','numerical','integerOnly' => true
-      ],
-      [
-        'description, sort','safe','on' => 'search'
-      ],
-    ];
-  }
-
-  /**
-   * @return array
-   */
-  public function attributeLabels()
-  {
-    return [
-      'userid' => 'Владелец',
-      'description' => 'Описание',
-      'status' => 'Статус',
-      'sort' => 'Сортировка',
-    ];
-  }
-
-  protected function beforeSave()
-  {
-    if($this->isNewRecord)
+    /**
+     * @return string
+     */
+    public function tableName()
     {
-      $this->sort = Yii::app()->db->createCommand()->select('MAX(sort) + 1')->from($this->tableName())->queryScalar();
+        return '{{payeer}}';
     }
 
-    return parent::beforeSave();
-  }
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            ['userid, description', 'required'],
+            ['userid, sort', 'numerical', 'integerOnly' => true],
+            ['description', 'length', 'max' => 255],
+            ['status, sort', 'numerical', 'integerOnly' => true],
+            ['description, sort', 'safe', 'on' => 'search'],
+        ];
+    }
 
-  /**
-   * @return CActiveDataProvider
-   */
-  public function search()
-  {
-    $criteria = new CDbCriteria;
+    /**
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return [
+            'userid' => 'Владелец',
+            'description' => 'Описание',
+            'status' => 'Статус',
+            'sort' => 'Сортировка',
+        ];
+    }
 
-    $criteria->compare('description',$this->description,true);
-    $criteria->compare('status',$this->status);
+    protected function beforeSave()
+    {
+        if ($this->isNewRecord)
+        {
+            $this->sort = Yii::app()->db->createCommand()->select('MAX(sort) + 1')->from($this->tableName())->queryScalar();
+        }
 
-    return new CActiveDataProvider(get_class($this),['criteria' => $criteria,'sort' => ['defaultOrder' => 'sort']]);
-  }
+        return parent::beforeSave();
+    }
 
-  /**
-   * Count all unfinished tasks
-   *
-   * @return int
-   */
-  public function countUnfinished()
-  {
-    return self::model()->count('status != :status',[':status' => TodoStatusHelper::STATUS_DONE]);
-  }
+    /**
+     * @return CActiveDataProvider
+     */
+    public function search()
+    {
+        $criteria = new CDbCriteria;
+
+        $criteria->compare('description', $this->description, true);
+        $criteria->compare('status', $this->status);
+
+        return new CActiveDataProvider(get_class($this), ['criteria' => $criteria,'sort' => ['defaultOrder' => 'sort']]);
+    }
+
+    /**
+     * Count all unfinished tasks
+     *
+     * @return int
+     */
+    public function countUnfinished()
+    {
+        return self::model()->count('status != :status', [':status' => TodoStatusHelper::STATUS_DONE]);
+    }
 }

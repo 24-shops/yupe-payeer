@@ -16,117 +16,105 @@ use yupe\components\controllers\BackController;
  */
 class PayeerBackendController extends BackController
 {
-  public function filters()
-  {
-    return CMap::mergeArray(
-      parent::filters(),
-      [
-        'postOnly + delete',
-      ]
-    );
-  }
-
-  public function actions()
-  {
-    return [
-      'inline' => [
-        'class' => 'yupe\components\actions\YInLineEditAction',
-        'model' => 'Payeer',
-        'validAttributes' => [
-          'status',
-        ]
-      ],
-      'sortable' => [
-        'class' => 'yupe\components\actions\SortAction',
-        'model' => 'Payeer',
-        'attribute' => 'sort',
-      ]
-    ];
-  }
-
-  public function actionIndex()
-  {
-    /*$model = new Payeer('search');
-    $query = Yii::app()->getRequest()->getQuery('Payeer');
-
-    $model->unsetAttributes();
-
-    if ($query) {
-      $model->setAttributes($query);
+    public function filters()
+    {
+        return CMap::mergeArray(
+            parent::filters(),
+            [
+                'postOnly + delete',
+            ]
+        );
     }
 
-    $this->render('index', ['model' => $model]);*/
-    $this->render('index');
-  }
-
-  public function actionCreate()
-  {
-    $model = new Payeer();
-
-    if ($data = Yii::app()->getRequest()->getPost('Payeer')) {
-
-      $model->setAttributes($data);
-
-      if ($model->save()) {
-        Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно добавлена');
-
-        $this->redirect((array)Yii::app()->getRequest()->getPost('submit-type', ['create']));
-      }
+    public function actions()
+    {
+        return [
+            'inline' => [
+                'class' => 'yupe\components\actions\YInLineEditAction',
+                'model' => 'Payeer',
+                'validAttributes' => [
+                    'status',
+                ],
+            ],
+            'sortable' => [
+                'class' => 'yupe\components\actions\SortAction',
+                'model' => 'Payeer',
+                'attribute' => 'sort',
+            ],
+        ];
     }
 
-    $this->render('create', ['model' => $model]);
-  }
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
 
-  public function actionUpdate($id)
-  {
-    $model = $this->loadModel($id);
+    public function actionCreate()
+    {
+        $model = new Payeer();
 
-    if ($data = Yii::app()->getRequest()->getPost('Payeer')) {
+        if ($data = Yii::app()->getRequest()->getPost('Payeer')) {
 
-      $model->setAttributes($data);
+            $model->setAttributes($data);
 
-      if ($model->update()) {
-        Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно обновлена');
+            if ($model->save()) {
+                Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно добавлена');
 
-        $submitType = Yii::app()->getRequest()->getPost('submit-type');
-
-        if (isset($submitType)) {
-          $this->redirect([$submitType]);
-        } else {
-          $this->redirect(['update', 'id' => $model->id]);
+                $this->redirect((array)Yii::app()->getRequest()->getPost('submit-type', ['create']));
+            }
         }
-      }
+
+        $this->render('create', ['model' => $model]);
     }
 
-    $this->render('update', ['model' => $model]);
-  }
+    public function actionUpdate($id)
+    {
+        $model = $this->loadModel($id);
 
-  public function actionDelete($id)
-  {
-    if ($this->loadModel($id)->delete()) {
-      Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно удалена');
+        if ($data = Yii::app()->getRequest()->getPost('Payeer')) {
 
-      if (!Yii::app()->getRequest()->getParam('ajax')) {
-        $this->redirect((array)Yii::app()->getRequest()->getPost('returnUrl', 'index'));
-      }
-    }
-  }
+            $model->setAttributes($data);
 
-  /**
-   * @param $id
-   * @return Payeer
-   * @throws CHttpException
-   */
-  private function loadModel($id)
-  {
-    $model = Payeer::model()->findByPk($id);
+            if ($model->update()) {
+                Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно обновлена');
 
-    if ($model === null) {
-      throw new CHttpException(404, 'Запрошенная страница не найдена.');
+                $submitType = Yii::app()->getRequest()->getPost('submit-type');
+
+                if (isset($submitType)) {
+                    $this->redirect([$submitType]);
+                } else {
+                    $this->redirect(['update', 'id' => $model->id]);
+                }
+            }
+        }
+
+        $this->render('update', ['model' => $model]);
     }
 
-    return $model;
-  }
+    public function actionDelete($id)
+    {
+        if ($this->loadModel($id)->delete()) {
+            Yii::app()->user->setFlash(YFlashMessages::SUCCESS_MESSAGE, 'Задача успешно удалена');
+
+            if (!Yii::app()->getRequest()->getParam('ajax')) {
+                $this->redirect((array)Yii::app()->getRequest()->getPost('returnUrl', 'index'));
+            }
+        }
+    }
+
+    /**
+     * @param $id
+     * @return Payeer
+     * @throws CHttpException
+     */
+    private function loadModel($id)
+    {
+        $model = Payeer::model()->findByPk($id);
+
+        if ($model === null) {
+            throw new CHttpException(404, 'Запрошенная страница не найдена.');
+        }
+
+        return $model;
+    }
 }
-
-?>

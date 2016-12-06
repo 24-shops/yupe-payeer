@@ -17,8 +17,8 @@ class PayeerPaymentSystem extends PaymentSystem
 {
   public function renderCheckoutForm(Payment $payment,Order $order,$return=false)
   {
-    $payeer=new Payeer($payment);
-    $sessionId=$payeer->getSessionId($order);
+    $payeer = new Payeer($payment);
+    $sessionId = $payeer->getSessionId($order);
 
     /*if(!$sessionId)
     {
@@ -30,14 +30,14 @@ class PayeerPaymentSystem extends PaymentSystem
       return false;
     }*/
 
-    $action=$payeer->buildUrl();
+    $action = $payeer->buildUrl();
     return Yii::app()->getController()->renderPartial(
       'application.modules.payeer.views.form',
       [
-        //'action'=>$payeer->getUrl('Pay'),
-        //'action'=>'https://payeer.com/api/payment/',
-        'action'=>$action,
-        'sessionId'=>$sessionId
+        //'action' => $payeer->getUrl('Pay'),
+        //'action' => 'https://payeer.com/api/payment/',
+        'action' => $action,
+        'sessionId' => $sessionId
       ],
       $return
     );
@@ -46,12 +46,12 @@ class PayeerPaymentSystem extends PaymentSystem
   public function processCheckout(Payment $payment,CHttpRequest $request)
   {
     //$this->msg(__CLASS__." ".__METHOD__);
-    $payeer=new Payeer($payment);
-    $order=Order::model()->findByUrl($payeer->getOrderIdFromHash($request));
+    $payeer = new Payeer($payment);
+    $order = Order::model()->findByUrl($payeer->getOrderIdFromHash($request));
 
-    if($order===null)
+    if($order === null)
     {
-      Yii::log(Yii::t('PayeerModule.payeer','The order doesn\'t exist.'),CLogger::LEVEL_ERROR);
+      Yii::log(Yii::t('PayeerModule.payeer', 'The order doesn\'t exist.'), CLogger::LEVEL_ERROR);
 
       return false;
     }
@@ -59,17 +59,17 @@ class PayeerPaymentSystem extends PaymentSystem
     if($order->isPaid())
     {
       Yii::log(
-        Yii::t('PayeerModule.payeer','The order #{n} is already payed.',$order->getPrimaryKey()),
+        Yii::t('PayeerModule.payeer', 'The order #{n} is already payed.', $order->getPrimaryKey()),
         CLogger::LEVEL_ERROR
       );
 
       return $order;
     }
 
-    if($payeer->getPaymentStatus($request)==='Charged' && $order->pay($payment))
+    if($payeer->getPaymentStatus($request) === 'Charged' && $order->pay($payment))
     {
       Yii::log(
-        Yii::t('PayeerModule.payler','The order #{n} has been payed successfully.',$order->getPrimaryKey()),
+        Yii::t('PayeerModule.payler', 'The order #{n} has been payed successfully.', $order->getPrimaryKey()),
         CLogger::LEVEL_INFO
       );
     }
@@ -77,7 +77,7 @@ class PayeerPaymentSystem extends PaymentSystem
     {
       Yii::app()->getUser()->setFlash(
         YFlashMessages::ERROR_MESSAGE,
-        Yii::t('PayeerModule.payeer','Attempt to pay failed')
+        Yii::t('PayeerModule.payeer', 'Attempt to pay failed')
       );
       Yii::log(
         Yii::t(
@@ -92,5 +92,3 @@ class PayeerPaymentSystem extends PaymentSystem
     return $order;
   }
 }
-
-?>

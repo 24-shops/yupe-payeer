@@ -9,41 +9,22 @@
  **/
 
 return [
-  'module'=>[
-    'class'=>'application.modules.payeer.PayeerModule',
-  ],
-  'import'=>[
-    'application.modules.payeer.helpers.*',
-    'application.modules.payeer.PayeerModule',
-    //'application.modules.payeer.listeners.PayeerTemplateListener',
-  ],
-  'component'=>[
-    'paymentManager'=>[
-      'paymentSystems'=>[
-        'payeer'=>[
-          'class'=>'application.modules.payeer.components.payments.PayeerPaymentSystem',
-        ]
-      ],
+    'module' => [
+        'class' => 'application.modules.payeer.PayeerModule',
     ],
-    'payeerBackend'=>[
-      'class'=>'application.modules.payeer.controllers.PayeerBackend',
+    'import' => [
+        'application.modules.payeer.PayeerModule',
     ],
-    /*'callbackManager'=>[
-      'class'=>'application.modules.callback.components.CallbackManager',
-    ],
-    'eventManager'=>[
-      'class'=>'yupe\components\EventManager',
-      'events'=>[
-        'template.head.end'=>[
-          ['CallbackTemplateListener','js'],
+    'component' => [
+        'paymentManager' => [
+            'paymentSystems' => [
+                'payeer' => [
+                    'class' => 'application.modules.payeer.components.payments.PayeerPaymentSystem',
+                ],
+            ],
         ],
-      ],
-    ],*/
-  ],
-  'rules'=>[
-    '/payeer/payeerBackend/index'=>'payeer/payeerBackend/index',
-    '/payeer'=>'payeer',
-  ],
+    ],
+    'rules'=>[
+        '/payeer/payeerBackend/index'=>'payeer/payeerBackend/index',
+    ],
 ];
-
-?>
