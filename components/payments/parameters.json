@@ -2,13 +2,17 @@
     "name": "Payeer",
     "settings":
     [
-	{
+        {
             "variable": "m_shop",
             "name": "Номер магазина"
         },
         {
             "variable": "m_key",
             "name": "Идентификатор продавца (секретный ключ)"
+        },
+        {
+            "variable": "m_key_extra_options",
+            "name": "Ключ для шифрования дополнительных параметров"
         },
         {
             "variable": "merchant_ips",

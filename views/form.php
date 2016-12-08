@@ -9,14 +9,14 @@
  **/
 
 /**
- * Payeer Form - Кнопка обработки платежа - работает
- *
- * @var string $action Form action url
- * @var string $sessionId
+ * @var $action Ссылка на платежную систему
  */
 ?>
 
-<?= CHtml::beginForm($action, "get", ["_target" => "blank"]) ?>
-<?= CHtml::hiddenField('session_id', $sessionId) ?>
-<?= CHtml::submitButton(Yii::t('PayeerModule.payeer', 'Pay')) ?>
+<?= CHtml::beginForm($action,'post',['target'=>'_blank']) ?>
+<?= CHtml::hiddenField('m_shop',$m_shop) ?>
+<?= CHtml::hiddenField('m_amount',$m_amount) ?>
+<?= CHtml::hiddenField('m_curr',$m_curr) ?>
+<?= CHtml::hiddenField('m_desc',$m_desc) ?>
+<?= CHtml::hiddenField('m_sign',$m_sign) ?>
 <?= CHtml::endForm() ?>

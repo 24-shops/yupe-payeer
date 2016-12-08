@@ -27,7 +27,7 @@ class PayeerModule extends WebModule
     /**
      * 
      */
-    const VERSION='0.6';
+    const VERSION='0.3';
 
     /**
      * @return array
@@ -43,15 +43,6 @@ class PayeerModule extends WebModule
     public function getNavigation()
     {
         return false;
-        /*return [
-            [
-                'icon'  => 'fa fa-fw fa-list-alt',
-                'label' => 'Баланс кошелька',
-                'url'   => [
-                    '/payeer/payeerBackend/index'
-                ],
-            ],
-        ];*/
     }
 
     /**
@@ -60,16 +51,15 @@ class PayeerModule extends WebModule
     public function getAdminPageLink()
     {
         return false;
-        //return '/payeer/payeerBackend/index';
     }
 
     /**
      * @return bool
      */
-    /*public function getIsShowInAdminMenu()
+    public function getIsShowInAdminMenu()
     {
-        return true;
-    }*/
+        return false;
+    }
 
     /**
      * @return string
