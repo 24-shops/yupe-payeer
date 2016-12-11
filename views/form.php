@@ -13,10 +13,7 @@
  */
 ?>
 
-<!-- [<?php /*var_dump($params)*/?>] -->
-
 <?php /* CHtml::beginForm($action,'post',['target'=>'_blank']) */ ?>
-
 <?= CHtml::beginForm($action,'post') ?>
 <?= CHtml::hiddenField('m_shop',$m_shop) ?>
 <?= CHtml::hiddenField('m_orderid',$m_orderid) ?>
