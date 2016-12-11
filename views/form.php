@@ -13,8 +13,13 @@
  */
 ?>
 
-<?= CHtml::beginForm($action,'post',['target'=>'_blank']) ?>
+<!-- [<?php /*var_dump($params)*/?>] -->
+
+<?php /* CHtml::beginForm($action,'post',['target'=>'_blank']) */ ?>
+
+<?= CHtml::beginForm($action,'post') ?>
 <?= CHtml::hiddenField('m_shop',$m_shop) ?>
+<?= CHtml::hiddenField('m_orderid',$m_orderid) ?>
 <?= CHtml::hiddenField('m_amount',$m_amount) ?>
 <?= CHtml::hiddenField('m_curr',$m_curr) ?>
 <?= CHtml::hiddenField('m_desc',$m_desc) ?>
