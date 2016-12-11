@@ -24,8 +24,12 @@ git clone git@github.com:24-shops/yupe-payeer.git
 * Нажать кнопку `Добавить способ оплаты и продолжить`
 * В случае успешного создания способа оплаты, на экране, помимо указанных вами данных, должна появиться строка `Ссылка для HTTP уведомлений платежной системы`.
 Содержимое для примера: `http://yupe.ru/payment/process/3`, где `3` - это `<id способа оплаты>` (в вашем случае может быть другим).
-* В панели управления [Payeer-ом.com](https://payeer.com/03118520) (_доступы выдаются при заключении договора_) указать адрес возврата: `http://<адрес вашего сайта>/payment/process/<id способа оплаты>?order_id={order_id}`.
-Для примера выше это будет `http://yupe.ru/payment/process/3?order_id={order_id}`
+* В панели управления [Payeer-ом.com](https://payeer.com/03118520) (_доступы выдаются при заключении договора_) указать адрес возврата на обработчик вашего магазина: `http://<адрес вашего сайта>/payment/process/<id способа оплаты>?my_action=handler`.
+Для примера выше это будет `http://yupe.ru/payment/process/3?my_action=handler`
+* Для успешной оплаты:
+Пример `http://yupe.ru/payment/process/3?my_action=success`
+* Для неуспешной оплаты:
+Пример `http://yupe.ru/payment/process/3?my_action=fail`
 
 Исходный код распространяется по [лицензии BSD](http://ru.wikipedia.org/wiki/%D0%9B%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F_BSD).
 
