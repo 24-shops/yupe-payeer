@@ -1,7 +1,7 @@
 {
     "name": "24-shops/yupe-payeer",
     "description": "Yupe CMS a payment gateway payeer.com",
-    "license": "BSD",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "shop-go",
