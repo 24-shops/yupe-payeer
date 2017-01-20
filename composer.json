@@ -1,0 +1,13 @@
+{
+    "name": "24-shops/yupe-payeer",
+    "description": "Yupe CMS a payment gateway payeer.com",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "shop-go",
+            "email": "24-shops@mail.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
